@@ -1,0 +1,14 @@
+/*伪代码*/
+/*
+1.注册主设备号：register_chrdev
+2.根据主设备号注册时的需要封装：file_operations
+3.创建/sys/xxx_class：class_create
+4.由于device是由platform_device提供的所以device_create需要封装为框架层，并提供给外界使用（EXPORT_SYMBOL）
+5.有创建就有led_class_destroy_device，这个也疯转为外部可用
+5.如何控制led，设计led_operations
+6.由于框架层不做任何操作led_operations的完成方法由外部提供，所以需要封装一个register_led_operations供外部使用
+7.以上六步完成以后led_drv复用性大大提高，维护的时候基本不需要进行修改
+8.实现led_operations，.init,.ctl;
+9.platform_driver:name,probe,remove;name用做匹配，probe用作device_create的创建，remove就是移除了 然后platform_driver_register
+10.platform_device：name，start，end，num_resources，resource，.dev:release,然后platform_device_register
+*/

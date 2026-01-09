@@ -1,0 +1,20 @@
+/{
+	myled{
+        compatible = "db,db_led1";
+        pinctrl-names = "default";
+                pinctrl-0 = <&pinctrl_led>;
+        
+        led-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
+        status = "okay";
+    };
+
+};
+&iomuxc {
+    imx6ul-evk {
+        pinctrl_led: ledgrp {
+            fsl,pins = <
+                MX6UL_PAD_GPIO1_IO03__GPIO1_IO03 0x10b0
+            >;
+        };
+    };
+};
